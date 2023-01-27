@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <ItemListContainer />
+      <ItemListContainer greeting="Bienvenidos a nuestra tienda online" />
     </>
   );
 }

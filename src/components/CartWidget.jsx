@@ -6,7 +6,7 @@ const CartWidget = () => {
     <>
       <Container maxW="100rem" bg="white">
         <Flex alignItems="center" gap="2">
-          <Box p="2" color="red.100">
+          <Box p="2" color="red.200">
             <div>
               <span className="material-symbols-outlined">shopping_cart</span>
             </div>
