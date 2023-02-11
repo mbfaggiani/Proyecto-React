@@ -10,42 +10,51 @@ import {
   MenuGroup,
   MenuDivider,
 } from "@chakra-ui/react";
+import {Link, NavLink} from "react-router-dom";
 
 const NavBar = () => {
   return (
     <>
-      <Container maxW="100rem" bg="white">
+      <Container maxW="100rem" bg="green.100">
         <Flex alignItems="center" gap="2">
           <Box p="2" color="red.100">
             <Heading size="md">
-              <img src={logo} alt="" width="150rem" />
+            <Link to={"/"}><img src={logo} alt="" width="150rem" /></Link>
             </Heading>
           </Box>
           <Spacer />
-          <Box p="6" color="red.100">
-            <CartWidget />
+          <Box>
+            <Link to={"/catalogue"}>
+          <Button colorScheme='green'>Catalogo</Button>
+          </Link>
           </Box>
-        </Flex>
-      </Container>
-      <div>
+          <Spacer/>
+          <Box>
+          <Flex align="center" justify="center">
         <Menu>
-          <MenuButton my={6} mx={6} as={Button} colorScheme="pink">
-            Productos
+          <MenuButton my={6} mx={6} as={Button} colorScheme="green">
+            Sabores
           </MenuButton>
           <MenuList>
             <MenuGroup title="Helados">
-              <MenuItem>Kilo de helado</MenuItem>
-              <MenuItem>1/2 kilo de helado </MenuItem>
-              <MenuItem>1/4 kilo de helado </MenuItem>
-            </MenuGroup>
-            <MenuDivider />
-            <MenuGroup title="Extras">
-              <MenuItem>Cucuruchos</MenuItem>
-              <MenuItem>Vacitos</MenuItem>
+              <NavLink to={`/category/${"Chocolates"}`}><MenuItem>Chocolates</MenuItem></NavLink>
+              <NavLink to={`/category/${"Cremas"}`}><MenuItem>Cremas </MenuItem></NavLink>
+              <NavLink to={`/category/${"Dulces de leche"}`}><MenuItem>Dulces de leche</MenuItem></NavLink>
             </MenuGroup>
           </MenuList>
         </Menu>
-      </div>
+        </Flex>
+          </Box>
+          <Spacer />
+          <Box p="6" color="red.100">
+            <NavLink to={"/cart"}>
+            <CartWidget />
+            </NavLink>
+          </Box>
+          
+        </Flex>
+        
+      </Container>
     </>
   );
 };

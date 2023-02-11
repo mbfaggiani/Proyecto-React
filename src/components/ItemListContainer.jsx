@@ -1,20 +1,68 @@
-import React from "react";
-import { Container, Flex, Spacer, Box, Heading } from "@chakra-ui/react";
+import ItemList from "./ItemList";
+import { Container, Flex, Spacer, Box, Heading, CheckboxIcon, Stack, Center} from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
+import Data from "../data.json"
 
-const ItemListContainer = ({greeting}) => {
+
+const ItemListContainer = () => {
+  const { category } = useParams();
+  console.log(category);
+
+  const getDatos = () => {
+    return new Promise((resolve, reject) => {
+      if (Data.lengh === 0) {
+        reject (newError("No hay datos"));
+      }
+      setTimeout(() => {
+        resolve(Data);
+      }, 2000);
+    });
+  };
+  
+  async function fetchingData () {
+    try {
+      const datosFetched = await getDatos();
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  
+fetchingData ();
+
+if (category === undefined) {
   return (
-    <>
-      <Container maxW="100rem" bg="pink">
-        <Flex alignItems="center" gap="2">
-          <Box p="2" color="black">
-            <div>
-              <h1>{greeting}</h1>
-              </div>
-          </Box>
-        </Flex>
-      </Container>
-    </>
+    <Container>
+        <Center>
+          <Heading>Catalogo</Heading>
+        </Center>
+      <ItemList helados={Data}/>
+    </Container>
   );
+} else {
+  const catFilter = Data.filter((helados) => helados.category === category);
+  console.log(catFilter);
+
+return (
+<div>
+<Container>
+  <Stack>
+      <Flex alignItems="center">
+        <Heading>Sabores</Heading>
+    </Flex>
+    
+  {catFilter ? (
+    <ItemList helados={catFilter}/>
+  ) : (
+    <ItemList helados={Data}/>
+  )};
+  </Stack>
+  </Container>
+</div>
+);
+};
 };
 
 export default ItemListContainer;
+
+
+
