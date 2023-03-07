@@ -4,7 +4,7 @@
 **Negrita**
 __Italica__
 
-soy un parrago
+soy un parrafo
 
 1.elemento 1
 1.elemento 2
