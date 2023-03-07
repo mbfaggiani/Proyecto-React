@@ -9,10 +9,10 @@ const ItemList = ({helados}) => {
         <Item
         key={helados.id}
         id={helados.id}
-        name={helados.name}
-        description={helados.description}
-        price={helados.price}
-        category={helados.category}
+        name={helados.nombre}
+        description={helados.descripcion}
+        price={helados.precio}
+        category={helados.categoria}
         stock={helados.stock}
         image={helados.image}/>
     ))}

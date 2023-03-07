@@ -1,65 +1,35 @@
 import ItemList from "./ItemList";
 import { Container, Flex, Spacer, Box, Heading, CheckboxIcon, Stack, Center} from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import Data from "../data.json"
+import { useEffect, useState } from "react";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+
 
 
 const ItemListContainer = () => {
-  const { category } = useParams();
-  console.log(category);
+  const [helados, setHelados] = useState([]);
+  const { categoria } = useParams();
 
-  const getDatos = () => {
-    return new Promise((resolve, reject) => {
-      if (Data.lengh === 0) {
-        reject (newError("No hay datos"));
-      }
-      setTimeout(() => {
-        resolve(Data);
-      }, 2000);
+
+  useEffect(() => {
+    const db = getFirestore();
+    const heladosCollection = collection(db, "helados");
+    getDocs(heladosCollection).then((querySnapshot) => {
+      const helados = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setHelados(helados);
     });
-  };
-  
-  async function fetchingData () {
-    try {
-      const datosFetched = await getDatos();
-    } catch (err) {
-      console.log(err)
-    }
-  }
-  
-fetchingData ();
+  }, []);
 
-if (category === undefined) {
-  return (
-    <Container>
-        <Center>
-          <Heading>Catalogo</Heading>
-        </Center>
-      <ItemList helados={Data}/>
-    </Container>
-  );
-} else {
-  const catFilter = Data.filter((helados) => helados.category === category);
-  console.log(catFilter);
+  const catFilter = helados.filter((helado) => helado.categoria === categoria);
 
 return (
 <div>
-<Container>
-  <Stack>
-      <Flex alignItems="center">
-        <Heading>Sabores</Heading>
-    </Flex>
-    
-  {catFilter ? (
-    <ItemList helados={catFilter}/>
-  ) : (
-    <ItemList helados={Data}/>
-  )};
-  </Stack>
-  </Container>
-</div>
+      {categoria ? <ItemList helados={catFilter} /> : <ItemList helados={helados} />}
+    </div>
 );
-};
 };
 
 export default ItemListContainer;

@@ -5,11 +5,11 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
-import CartContextComp from "./context/CartContextComp"
+import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 
 const App = () => {
   return (
-    <CartContextComp>
+    <ShoppingCartProvider>
     <BrowserRouter>
       <NavBar/>
       
@@ -23,7 +23,7 @@ const App = () => {
       
       <Footer/>
     </BrowserRouter>
-    </CartContextComp>
+    </ShoppingCartProvider>
   );
 };
 

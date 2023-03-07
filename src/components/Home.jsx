@@ -1,11 +1,11 @@
 import { Container } from '@chakra-ui/react'
 import React from 'react'
-import crema from "/images/crema.jpeg";
+import fondo from "/images/papel.jpg";
 
 const Home = () => {
   return (
     <Container >
-    <img src={crema} alt="fondo helado" width="200%"/>
+    <img src={fondo} alt="fondo" width="100%"/>
     </Container>
   )
 }

@@ -3,7 +3,7 @@ import ItemCount from "./ItemCount"
 import { Card, CardHeader, CardBody, CardFooter, Text, Heading, Stack, Divider, Button, ButtonGroup, Image } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
-const Item = ({id, name, description, price, category, image}) => {
+const Item = ({id, nombre, descripcion, precio, categoria, image}) => {
   return (
     <div>
       <div key={id}>
@@ -11,10 +11,10 @@ const Item = ({id, name, description, price, category, image}) => {
   <CardBody>
     <Image borderRadius='lg' src= {image}/>
     <Stack mt='6' spacing='3'>
-      <Heading size='md'> {name} </Heading>
-      <Text> {description}</Text>
-      <Text> Categoria: {category}</Text>
-      <Text color='yellow.600' fontSize='2xl'> Precio: ${price} </Text>
+      <Heading size='md'> {nombre} </Heading>
+      <Text> {descripcion}</Text>
+      <Text> Categoria: {categoria}</Text>
+      <Text color='yellow.600' fontSize='2xl'> Precio: ${precio} </Text>
     </Stack>
   </CardBody>
   <Divider />
