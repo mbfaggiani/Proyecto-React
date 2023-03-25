@@ -1,27 +1,52 @@
-import ItemDetail from "./ItemDetail"
-import { useState, useEffect } from "react";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { Box, Spinner } from "@chakra-ui/react";
+import ItemDetail from "./ItemDetail";
 
-const ItemDetailContainer = () => {
-  const [data, setData] = useState ([]);
-  useEffect(() => {
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+export default function ItemDetailContainer() {
+  const [productItem, setProductItem] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { id } = useParams();
+
+  const getItem = () => {
     const db = getFirestore();
-    const heladosCollection = collection(db, "helados");
-    getDocs(heladosCollection).then((querySnapshot) => {
-      const helados = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setData(helados);
-    });
+
+    setIsLoading(true);
+    const oneItem = doc(db, "helados", `${id}`);
+    getDoc(oneItem)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const docs = snapshot.data();
+          setProductItem(docs);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    getItem();
   }, []);
 
-
-return (
-  <>
-  <ItemDetail helados={data}/>
-  </>
-);
-};
-
-export default ItemDetailContainer;
+  return (
+    <Box>
+      {isLoading ? (
+        <Box className="container-spinner">
+          <Spinner className="spinner" />
+        </Box>
+      ) : (
+        <ItemDetail productItem={productItem} />
+      )}
+    </Box>
+  );
+}

@@ -5,11 +5,12 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
-import { ShoppingCartProvider } from "./context/ShoppingCartContext";
+import CartContextProvider from "./context/ShoppingCartContext";
+import Checkout from "./components/Checkout";
 
 const App = () => {
   return (
-    <ShoppingCartProvider>
+    <CartContextProvider>
     <BrowserRouter>
       <NavBar/>
       
@@ -17,13 +18,14 @@ const App = () => {
         <Route exact path= "/" element= {<Home />}/>;
         <Route exact path= "/catalogue" element={<ItemListContainer/>}/>;
         <Route exact path= "/category/:category" element={<ItemListContainer/>}/>;
-        <Route exact path="/item/:id" element={<ItemDetailContainer/>}/>;
-        <Route exact path="/cart" element={<Cart/>}/>;
+        <Route exact path= "/item/:id" element={<ItemDetailContainer/>}/>;
+        <Route exact path= "/cart" element={<Cart/>}/>;
+        <Route exact path= "/checkout" element={<Checkout/>}/>;
       </Routes>
       
       <Footer/>
     </BrowserRouter>
-    </ShoppingCartProvider>
+    </CartContextProvider>
   );
 };
 

@@ -1,73 +1,85 @@
-
+import React, { useState, useContext } from "react";
+import { Button, Image } from "@chakra-ui/react";
+import { CartContext } from "../context/ShoppingCartContext";
 import {
-  Center,
   Card,
   CardBody,
-  Image,
+  CardFooter,
   Stack,
   Heading,
   Text,
-  Button,
-  CardFooter,
-  Divider,
+  ButtonGroup,
 } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
-import ItemCount from "./ItemCount";
-import { useEffect, useState } from "react";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import ItemQuantitySelector from "./ItemQuantitySelector";
+import { Link } from "react-router-dom";
 
+const ItemDetail = ({ productItem }) => {
+  const { counter, setCounter, cart, setCart, cartItems } =
+    useContext(CartContext);
 
-
-const ItemDetail = ({helados}) => {
-  const {id} = useParams ();
-
-  const [producto, setProducto] = useState([]);
-
-  useEffect(() => {
-    const db = getFirestore();
-
-    const heladosRef = doc(db, "helados", `${id}`);
-
-    getDoc(heladosRef).then((snapshot) => {
-      if (snapshot.exists()) {
-        setProducto(snapshot.data());
-      } else {
-        console.log("No such document!");
-      }
-    });
-  }, []);
-
-  const filter = helados.filter((helado) => helado.id ==id)
   return (
     <>
-    {filter.map((helado) => (
-    <div key={helado.id}>
-    <Center>
-    <Card maxW='sm'>
-  <CardBody>
-    <Image
-      src={helado.image}
-      alt='Sabores'
-      borderRadius='lg'
-    />
-    <Stack mt='6' spacing='3'>
-      <Heading size='md'>{helado.sabor}</Heading>
-      <Text> {helado.descripcion}</Text>
-      <Text color='yellow.600' fontSize='2xl'> Precio: ${helado.precio}</Text>
-      <Text> Categoria: {helado.categoria}</Text>
-      <Text> Stock: {helado.stock}</Text>
-    </Stack>
-  </CardBody>
-  <Divider />
-  <CardFooter>
-    <ItemCount/>
-  </CardFooter>
-</Card>
-</Center>
-</div>
-    ))}
+      <Card
+        direction={{ base: "column", sm: "row" }}
+        overflow="hidden"
+        variant="outline"
+      >
+        <Image
+          objectFit="cover"
+          maxW={{ base: "100%", sm: "200px" }}
+          src={productItem.image}
+          alt={productItem.image}
+        />
+        <Stack>
+          <CardBody>
+            <Heading size="md">{productItem.flavor}</Heading>
+            <Text py="2">
+              {productItem.description}
+              {productItem.stock ? (
+                <p className="mt-1 text-sm text-green-500 text-left">
+                  Stock: {productItem.stock}
+                </p>
+              ) : (
+                <p className="mt-1 text-sm text-red-400 text-left">Sold out</p>
+              )}
+              $ {productItem.price}
+            </Text>
+          </CardBody>
+
+          <CardFooter>
+            <ButtonGroup spacing="12">
+              <ItemQuantitySelector stock={productItem.stock} />
+              <Button
+                onClick={() => {
+                  setCart(cart + counter);
+                  setCounter(0);
+                  if (counter != 0) {
+                    cartItems.push([
+                      productItem.flavor,
+                      productItem.price,
+                      counter,
+                    ]);
+                  } else {
+                    alert("Debe indicar la cantidad");
+                  }
+                }}
+                colorScheme="green"
+              >
+                Agregar al carrito
+              </Button>
+            </ButtonGroup>
+          </CardFooter>
+          <Button
+            onClick={() => setCounter(0)}
+            variant="ghost"
+            colorScheme="green"
+          >
+            <Link to={"/catalogue"}>Volver</Link>
+          </Button>
+        </Stack>
+      </Card>
     </>
   );
 };
 
-export default ItemDetail
+export default React.memo(ItemDetail);

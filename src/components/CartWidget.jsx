@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Flex, Box } from "@chakra-ui/react";
-import cart from "/images/cart.png";
+import cart from "../assets/cart.png";
 
 const CartWidget = () => {
   return (
@@ -9,7 +9,7 @@ const CartWidget = () => {
         <Flex alignItems="center" gap="2">
           <Box p="2" color="red.800">
             <div>
-            <img src={cart} alt="" width="40rem" />
+              <img src={cart} alt="" width="40rem" />
             </div>
           </Box>
         </Flex>

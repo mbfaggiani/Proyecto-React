@@ -1,18 +1,16 @@
-#Encabezado 1
-##Encabezado 2
----
-**Negrita**
-__Italica__
+#**Proyecto Final del curso React JS de Coderhouse**
 
-soy un parrafo
+##_El E-Commerce de Trapem realiza la venta de helados veganos._
 
-1.elemento 1
-1.elemento 2
+Para realizar este proyecto se utilizo:
 
-*elemento 1
-*elemento 2
+-Servicio Firebase, usando Firestore para base de datos dinamica NoSQL.
 
-|Nombre|Apellido|Mail|
-|Belen|Faggiani|mbfaggiani@outlook.com|
+-Chakcra UI (libreria) y sweat alert
+
+-Comandos:  Para la instalacion -npm install 
+            Para ejecutarlo -npm run dev
+
+-React-router-dom para las rutas
 
 
