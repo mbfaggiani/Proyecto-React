@@ -12,6 +12,7 @@ import { useState } from "react";
 import { collection, getFirestore, addDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 
+
 const Checkout = () => {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -49,7 +50,7 @@ const Checkout = () => {
       >
         <Box my="10px">
           <Text fontSize="xl">
-            COMPLETA EL FORMULARIO PARA CONFIRMAR LA COMPRA
+            Completar el formulario para enviar el pedido
           </Text>
         </Box>
 
@@ -97,6 +98,7 @@ const Checkout = () => {
         >
           Enviar y confirmar Compra
         </Button>
+          
         <Flex justify="center" direction="column" alignItems="center" m="5">
           <Text fontSize="xx-large" m="3">
             Gracias por relizar su compra

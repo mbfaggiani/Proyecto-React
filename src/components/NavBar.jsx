@@ -42,7 +42,7 @@ const NavBar = () => {
                       <MenuItem>Chocolates</MenuItem>
                     </NavLink>
                     <NavLink to={`/category/${"Cremas"}`}>
-                      <MenuItem>Cremas </MenuItem>
+                      <MenuItem>Cremas</MenuItem>
                     </NavLink>
                     <NavLink to={`/category/${"Dulces de leche"}`}>
                       <MenuItem>Dulces de leche</MenuItem>

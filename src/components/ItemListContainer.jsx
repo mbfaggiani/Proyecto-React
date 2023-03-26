@@ -61,7 +61,7 @@ const ItemListContainer = () => {
     );
   } else {
     const categoriesFilter = productsList.filter(
-      (product) => product.category === id
+      (product) => product.category === category
     );
 
     return (
@@ -72,6 +72,7 @@ const ItemListContainer = () => {
           <ItemList products={productsList} />
         )}
       </Box>
+      
     );
   }
 };

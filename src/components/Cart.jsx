@@ -43,7 +43,7 @@ const Cart = () => {
           colorScheme="green"
           size="md"
           mx="2"
-          onClick={() => alert("El carro debe tener al menos un producto.")}
+          onClick={() => alert("El carrito de compras debe contar con al menos un producto.")}
         >
           Realizar pedido
         </Button>
@@ -60,7 +60,7 @@ const Cart = () => {
               <Tr>
                 <Th>Producto</Th>
                 <Th>Cantidad</Th>
-                <Th>Precio total</Th>
+                <Th>Importe total</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -104,7 +104,7 @@ const Cart = () => {
         <Spacer />
       </Flex>
 
-      <Checkout />
+
     </>
   );
 };
