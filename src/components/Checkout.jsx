@@ -12,7 +12,6 @@ import { useState } from "react";
 import { collection, getFirestore, addDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 
-
 const Checkout = () => {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -22,9 +21,18 @@ const Checkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (nombre === "" || email === "" || telefono === "") {
-      alert("No pueden haber campos vacios");
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "No pueden haber campos vacios!",
+      });
     } else {
-      addDoc(ordersCollection, order).then(({ id }) => setOrderId(id));
+      addDoc(ordersCollection, order).then(({ id }) => setOrderId(id)) &
+        Swal.fire(
+          "Gracias por realizar tu pedido!",
+          "A continuacion te dejamos tu numero de orden",
+          "success"
+        );
     }
   };
 
@@ -92,20 +100,13 @@ const Checkout = () => {
           onClick={handleSubmit}
           variant="solid"
           colorScheme="green"
-          size="sm"
+          size="md"
           width="100%"
           height="35px"
         >
-          Enviar y confirmar Compra
+          Enviar y confirmar pedido
         </Button>
-          
         <Flex justify="center" direction="column" alignItems="center" m="5">
-          <Text fontSize="xx-large" m="3">
-            Gracias por relizar su compra
-          </Text>
-          <Text fontSize="x-large" m="3">
-            Su pedido se realizo con éxito
-          </Text>
           <Text fontSize="large" m="3">
             Número de órden: {orderId}
           </Text>

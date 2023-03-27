@@ -21,21 +21,21 @@ const ItemQuantitySelector = ({ stock }) => {
     <>
       <Stack spacing={4} direction="row" align="center">
         {counter === 0 ? (
-          <Button onClick={resta} variant="ghost" colorScheme="teal" size="md">
+          <Button onClick={resta} colorScheme="green" size="md">
             -
           </Button>
         ) : (
-          <Button onClick={resta} colorScheme="teal" size="md">
+          <Button onClick={resta} colorScheme="green" size="md">
             -
           </Button>
         )}
         <h2>{counter}</h2>
         {counter === stock ? (
-          <Button onClick={suma} variant="ghost" colorScheme="teal" size="md">
+          <Button onClick={suma} variant="ghost" colorScheme="green" size="md">
             +
           </Button>
         ) : (
-          <Button onClick={suma} colorScheme="teal" size="md">
+          <Button onClick={suma} colorScheme="green" size="md">
             +
           </Button>
         )}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Center, Spinner } from "@chakra-ui/react";
 import ItemDetail from "./ItemDetail";
 
 function classNames(...classes) {
@@ -41,9 +41,11 @@ export default function ItemDetailContainer() {
   return (
     <Box>
       {isLoading ? (
+        <Center>
         <Box className="container-spinner">
           <Spinner className="spinner" />
         </Box>
+        </Center>
       ) : (
         <ItemDetail productItem={productItem} />
       )}

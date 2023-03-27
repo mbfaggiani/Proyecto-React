@@ -9,7 +9,7 @@ import {
   Stack,
   Divider,
   Button,
-  Grid,
+  Center,
   Image,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -18,7 +18,8 @@ const Item = ({ id, flavor, description, price, category, image }) => {
   return (
     <div>
       <div key={id}>
-        <Card maxW="lg">
+        <Center padding='4'>
+        <Card maxW="md">
           <CardBody>
             <Image borderRadius="lg" src={image} />
             <Stack mt="6" spacing="3">
@@ -32,12 +33,15 @@ const Item = ({ id, flavor, description, price, category, image }) => {
             </Stack>
           </CardBody>
           <Divider />
+          <Center>
           <CardFooter>
             <Button variant="solid" colorScheme="green">
               <Link to={`/item/${id}`}>Detalle</Link>
             </Button>
           </CardFooter>
+          </Center>
         </Card>
+        </Center>
       </div>
     </div>
   );

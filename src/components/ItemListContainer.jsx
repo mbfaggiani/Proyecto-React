@@ -43,15 +43,15 @@ const ItemListContainer = () => {
               </Text>
               <Text fontSize="md">
                 {" "}
-                Variedades de Helado Vegano Artesanal, sin ingredientes de
+                Variedades de helado vegano artesanal, sin ingredientes de
                 origen animal, a base de ingredientes naturales, de elaboración
-                propia y de gran sabor y calidad
+                propia y de gran sabor y calidad.
               </Text>
             </Stack>
           </Box>
         </Box>
         {isLoading ? (
-          <Box className="container-spinner">
+          <Box className="container-spinner" padding='4'>
             <Spinner className="spinner-home" />
           </Box>
         ) : (

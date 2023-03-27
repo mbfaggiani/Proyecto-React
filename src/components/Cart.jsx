@@ -12,9 +12,10 @@ import {
   Th,
   Td,
   TableContainer,
+  Box,
 } from "@chakra-ui/react";
 import { Link, NavLink } from "react-router-dom";
-import Checkout from "./Checkout";
+import Swal from 'sweetalert2'
 
 const Cart = () => {
   let precioTotal = 0;
@@ -31,22 +32,33 @@ const Cart = () => {
     if (cantidadProductos > 0) {
       return (
         <Link to={`/checkout`}>
+          <Box padding='4'>
           <Button as={Button} colorScheme="green" size="md" mx="2">
             Realizar pedido
           </Button>
+          </Box>
         </Link>
       );
     } else {
       return (
+        <Box padding='4'>
         <Button
           as={Button}
           colorScheme="green"
           size="md"
           mx="2"
-          onClick={() => alert("El carrito de compras debe contar con al menos un producto.")}
+          onClick={() => 
+            Swal.fire(
+              'Espera!',
+              'El carrito de compras no puede estar vacio!',
+              'error'
+            )  
+          }
         >
           Realizar pedido
         </Button>
+        </Box>
+        
       );
     }
   };
